@@ -20,7 +20,12 @@ class CreatePesanansTable extends Migration
             $table->foreign('produk_id')->references('id')->on('produks')->onDelete('cascade');
             $table->unsignedBigInteger('warna_id');
             $table->foreign('warna_id')->references('id')->on('warnas')->onDelete('cascade');
-            $table->integer('total_pesanan');
+            $table->integer('size_s');
+            $table->integer('size_m');
+            $table->integer('size_l');
+            $table->integer('size_xl');
+            $table->integer('size_xxl');
+            $table->integer('total');
             $table->timestamps();
         });
     }

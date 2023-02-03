@@ -10,14 +10,14 @@
                         Tambah Data Pesanan
                     </div>
                     <div class="card-body bg-light shadow p-4">
-                        <form action="{{ route('pesanan.store') }}" method="post">
+                        <form action="{{ route('pesanan.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="mb-3">
                                 <label class="form-label">Pilih Produk</label>
                                 <select name="produk_id" class="form-control @error('produk_id') is-invalid @enderror"
                                     id="">
                                     @foreach ($produk as $data)
-                                        <option value="{{ $data->id }}">{{ $data->produk }}</option>
+                                        <option value="{{ $data->id }}">{{ $data->nama }}</option>
                                     @endforeach
                                 </select>
                                 @error('produk_id')
@@ -31,7 +31,7 @@
                                 <select name="warna_id" class="form-control @error('warna_id') is-invalid @enderror"
                                     id="">
                                     @foreach ($warna as $data)
-                                        <option value="{{ $data->id }}">{{ $data->warna }}</option>
+                                        <option value="{{ $data->id }}">{{ $data->nama_warna }}</option>
                                     @endforeach
                                 </select>
                                 @error('warna_id')
@@ -40,11 +40,60 @@
                                     </span>
                                 @enderror
                             </div>
+                            {{-- <div class="mb-3">
+                                <label class="form-label">Desain</label>
+                               <input type="file" class="form-control  @error('image') is-invalid @enderror" name="image" required>
+                                    @error('image')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                            </div> --}}
                             <div class="mb-3">
-                                <label class="form-label">Total Pesanan</label>
-                                <input type="number" class="form-control  @error('total_pesanan') is-invalid @enderror"
-                                    name="total_pesanan">
-                                @error('total_pesanan')
+                                <label class="form-label">Size S</label>
+                                <input type="number" class="form-control  @error('size_s') is-invalid @enderror"
+                                    name="size_s">
+                                @error('size_s')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Size M</label>
+                                <input type="number" class="form-control  @error('size_m') is-invalid @enderror"
+                                    name="size_m">
+                                @error('size_m')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Size L</label>
+                                <input type="number" class="form-control  @error('size_l') is-invalid @enderror"
+                                    name="size_l">
+                                @error('size_l')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Size XL</label>
+                                <input type="number" class="form-control  @error('size_xl') is-invalid @enderror"
+                                    name="size_xl">
+                                @error('size_xl')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Size XXL</label>
+                                <input type="number" class="form-control  @error('size_xxl') is-invalid @enderror"
+                                    name="size_xxl">
+                                @error('size_xxl')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

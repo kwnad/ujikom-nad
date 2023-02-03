@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Pesanan;
 use App\Models\Produk;
 use App\Models\Warna;
-use App\Models\WarnaProduk;
+use DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PesananController extends Controller
 {
@@ -22,7 +23,8 @@ class PesananController extends Controller
      */
     public function index()
     {
-        $pesanan = Pesanan::all();
+        $pesanan = Pesanan::get();
+
         return view('pesanan.index', compact('pesanan'));
 
     }
@@ -48,11 +50,42 @@ class PesananController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'total_pesanan' => 'required',
+            'produk_id' => 'required',
+            'warna_id' => 'required',
+            'size_s' => 'required',
+            'size_m' => 'required',
+            'size_l' => 'required',
+            'size_xl' => 'required',
+            'size_xxl' => 'required',
         ]);
 
         $pesanan = new Pesanan();
-        $pesanan->total_pesanan = $request->total_pesanan;
+        $size_s = $request->size_s;
+        $size_m = $request->size_m;
+        $size_l = $request->size_l;
+        $size_xl = $request->size_xl;
+        $size_xxl = $request->size_xxl;
+        $total = $size_s + $size_m + $size_l + $size_xl + $size_xxl;
+
+        $kode_pesanan = DB::table('pesanans')->select(DB::raw('MAX(RIGHT(kode_pesanan, 3)) as kode'));
+        if ($kode_pesanan->count() > 0) {
+            foreach ($kode_pesanan->get() as $kode_pesanan) {
+                $x = ((int) $kode_pesanan->kode) + 1;
+                $kode = sprintf('%03s', $x);
+            }
+        } else {
+            $kode = '001';
+        }
+
+        $pesanan->kode_pesanan = 'RNK-' . date('dmy') . $kode;
+        $pesanan->produk_id = $request->produk_id;
+        $pesanan->warna_id = $request->warna_id;
+        $pesanan->size_s = $request->size_s;
+        $pesanan->size_m = $request->size_m;
+        $pesanan->size_l = $request->size_l;
+        $pesanan->size_xl = $request->size_xl;
+        $pesanan->size_xxl = $request->size_xxl;
+        $pesanan->total = $total;
         $pesanan->save();
         return redirect()->route('pesanan.index')
             ->with('success', 'Data berhasil dibuat!');
@@ -93,11 +126,19 @@ class PesananController extends Controller
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
-            'total_pesanan' => 'required',
+            'size_s' => 'required',
+            'size_m' => 'required',
+            'size_l' => 'required',
+            'size_xl' => 'required',
+            'size_xxl' => 'required',
         ]);
 
         $pesanan = Pesanan::findOrFail($id);
-        $pesanan->total_pesanan = $request->total_pesanan;
+        $pesanan->size_s = $request->size_s;
+        $pesanan->size_m = $request->size_m;
+        $pesanan->size_l = $request->size_l;
+        $pesanan->size_xl = $request->size_xl;
+        $pesanan->size_xxl = $request->size_xxl;
         $pesanan->save();
 
         return redirect()->route('pesanan.index')

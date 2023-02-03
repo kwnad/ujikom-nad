@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\WarnaProduk;
+use App\Models\Pesanan;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -15,5 +16,10 @@ class Produk extends Model
     public function warna_produk()
     {
         return $this->hasMany(WarnaProduk::class);
+    }
+
+    public function pesanan()
+    {
+        return $this->hasMany(Pesanan::class);
     }
 }

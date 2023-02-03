@@ -37,6 +37,12 @@
                                         <th>Kode Pesanan</th>
                                         <th>Produk</th>
                                         <th>Warna</th>
+                                        {{-- <th>Desain</th> --}}
+                                        <th>Size S</th>
+                                        <th>Size M</th>
+                                        <th>Size L</th>
+                                        <th>Size XL</th>
+                                        <th>Size XXL</th>
                                         <th>Total Pesanan</th>
                                         <th>Aksi</th>
                                     </tr>
@@ -45,11 +51,17 @@
                                     @php $no = 1; @endphp
                                     @foreach ($pesanan as $data)
                                         <tr>
-                                            <td>{{ $no++ }}</td>
-                                            <td>{{ $data->kode_pesanan }}</td>
-                                            <td>Rp. {{ $data->pesanan->nama }}</td>
-                                            <td>Rp. {{ $data->warna->nama_warna }}</td>
-                                            <td>Rp. {{ $data->total_pesanan }}</td>
+                                            <td> {{ $no++ }}</td>
+                                            <td> {{ $data->kode_pesanan }}</td>
+                                            <td> {{ $data->produk->nama }}</td>
+                                            <td> {{ $data->warna->nama_warna}}</td>
+                                            {{-- <td> {{ $data->image }}</td> --}}
+                                            <td> {{ $data->size_s }}</td>
+                                            <td> {{ $data->size_m }}</td>
+                                            <td> {{ $data->size_l }}</td>
+                                            <td> {{ $data->size_xl }}</td>
+                                            <td> {{ $data->size_xxl }}</td>
+                                            <td> {{ $data->total }}</td>
                                             <td>
                                                 <form action="{{ route('pesanan.destroy', $data->id) }}" method="post">
                                                     @csrf
