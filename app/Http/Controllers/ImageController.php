@@ -35,7 +35,11 @@ class ImageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'gambar_desain' => 'required'
+        ]);
+
+        
     }
 
     /**
