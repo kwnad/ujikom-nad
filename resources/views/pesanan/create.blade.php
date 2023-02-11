@@ -40,7 +40,7 @@
                                     </span>
                                 @enderror
                             </div>
-                            {{-- <div class="mb-3">
+                            <div class="mb-3">
                                 <label class="form-label">Desain</label>
                                <input type="file" class="form-control  @error('image') is-invalid @enderror" name="image" required>
                                     @error('image')
@@ -48,7 +48,7 @@
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
-                            </div> --}}
+                            </div>
                             <div class="mb-3">
                                 <label class="form-label">Size S</label>
                                 <input type="number" class="form-control  @error('size_s') is-invalid @enderror"

@@ -24,7 +24,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     route::get('/dashboard', function () {
@@ -35,4 +35,10 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::resource('/warnaProduk', WarnaProdukController::class);
     Route::resource('/pesanan', PesananController::class);
 
+});
+
+Route::prefix('customer')->middleware(['auth', 'customer'])->group(function () {
+    Route::get('/', function () {
+        return view('home');
+    });
 });

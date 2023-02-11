@@ -25,8 +25,8 @@ class Pesanan extends Model
         return $this->belongsTo(Warna::class, 'warna_id');
     }
 
-    // public function image()
-    // {
-    //     return $this->hasMany(Image::class);
-    // }
+    public function image()
+    {
+        return $this->hasMany(Image::class);
+    }
 }

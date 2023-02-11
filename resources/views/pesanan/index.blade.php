@@ -37,7 +37,7 @@
                                         <th>Kode Pesanan</th>
                                         <th>Produk</th>
                                         <th>Warna</th>
-                                        {{-- <th>Desain</th> --}}
+                                        <th>Desain</th>
                                         <th>Size S</th>
                                         <th>Size M</th>
                                         <th>Size L</th>
@@ -55,7 +55,7 @@
                                             <td> {{ $data->kode_pesanan }}</td>
                                             <td> {{ $data->produk->nama }}</td>
                                             <td> {{ $data->warna->nama_warna}}</td>
-                                            {{-- <td> {{ $data->image }}</td> --}}
+                                            <td> {{ $data->image }}</td>
                                             <td> {{ $data->size_s }}</td>
                                             <td> {{ $data->size_m }}</td>
                                             <td> {{ $data->size_l }}</td>
