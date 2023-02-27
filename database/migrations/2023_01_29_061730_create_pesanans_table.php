@@ -15,6 +15,8 @@ class CreatePesanansTable extends Migration
     {
         Schema::create('pesanans', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('kode_pesanan');
             $table->unsignedBigInteger('produk_id');
             $table->foreign('produk_id')->references('id')->on('produks')->onDelete('cascade');

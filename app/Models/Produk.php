@@ -2,16 +2,15 @@
 
 namespace App\Models;
 
-use App\Models\WarnaProduk;
+use App\Models\Gambar;
 use App\Models\Pesanan;
+use App\Models\WarnaProduk;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Produk extends Model
 {
     use HasFactory;
-    public $fillable = ['nama'];
-    public $timestamps = true;
 
     public function warna_produk()
     {
@@ -21,5 +20,10 @@ class Produk extends Model
     public function pesanan()
     {
         return $this->hasMany(Pesanan::class);
+    }
+
+    public function gambar()
+    {
+        return $this->hasMany(Gambar::class);
     }
 }

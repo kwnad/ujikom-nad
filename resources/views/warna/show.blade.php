@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-7">
                 <div class="card">
-                    <div class="card-header " style="background-color:  rgb(143, 188, 240);">
+                    <div class="card-header text-light" style="background-color:  rgb(124, 124, 124);">
                         Data Warna
                     </div>
                     <div class="card-body bg-light shadow p-4">

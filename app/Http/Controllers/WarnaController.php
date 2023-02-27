@@ -19,7 +19,7 @@ class WarnaController extends Controller
      */
     public function index()
     {
-        $warna = Warna::all();
+        $warna = Warna::latest()->get();
         return view('warna.index', compact('warna'));
 
     }
@@ -43,7 +43,7 @@ class WarnaController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'nama_warna' => 'required',
+            'nama_warna' => 'required|unique:warnas|',
         ]);
 
         $warna = new Warna();

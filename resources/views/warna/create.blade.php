@@ -6,7 +6,7 @@
             <div class="col-md-7">
                 @include('admin/layouts/_flash')
                 <div class="card">
-                    <div class="card-header " style="background-color:  rgb(143, 188, 240);">
+                    <div class="card-header text-light" style="background-color:  rgb(124, 124, 124);">
                         Tambah Data Warna
                     </div>
                     <div class="card-body bg-light shadow p-4">
