@@ -15,10 +15,8 @@ class CreateWarnaProduksTable extends Migration
     {
         Schema::create('warna_produks', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('produk_id');
-            $table->foreign('produk_id')->references('id')->on('produks')->onDelete('cascade');
-            $table->unsignedBigInteger('warna_id');
-            $table->foreign('warna_id')->references('id')->on('warnas')->onDelete('cascade');
+            $table->foreignId('produk_id')->constrained()->onDelete('cascade');
+            $table->foreignId('warna_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

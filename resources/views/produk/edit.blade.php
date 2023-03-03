@@ -37,7 +37,15 @@
 
                             <div class="mb-3">
                                 <label class="form-label">Warna</label>
-                                <select name="warna_id[]" class="js-example-basic-multiple w-100" id="" multiple="multiple">
+                                <select name="warna_id[]" id="warna_id" class="js-example-basic-multiple w-100" multiple="multiple">
+                                    @forelse($warnas as $warna)
+                                        <option value="{{ $warna->id }}" {{ in_array($warna->id, $produk->warnaProduk->pluck('id')->toArray()) ? 'selected' : null }} >{{ $warna->nama_warna }}</option>
+                                    @empty
+                                    @endforelse
+                                </select>
+                                @error('warna_id')<span class="text-danger">{{ $message }}</span>@enderror
+    
+                                {{-- <select name="warna_id[]" class="js-example-basic-multiple w-100" id="" multiple="multiple">
                                    @forelse($warna as $tag)
                                     <option value="{{ $tag->id }}" {{ in_array($tag->id, $produk->warna_produk->pluck('id')->toArray()) ? 'selected' : null }} >{{ $tag->name }}</option>
                                 @empty
@@ -47,15 +55,16 @@
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                @enderror
+                                @enderror --}}
                             </div>
 
                             <div class="mb-3">
                                 <label class="form-label">Bahan</label>
                                 <select name="bahan_id[]" class="js-example-basic-multiple w-100" id="" multiple="multiple">
-                                    @foreach ($bahan as $data)
-                                        <option value="{{ $data->id }}">{{ $data->nama_bahan }}</option>
-                                    @endforeach
+                                    @forelse($bahans as $bahan)
+                                        <option value="{{ $bahan->id }}" {{ in_array($bahan->id, $produk->bahanProduk->pluck('id')->toArray()) ? 'selected' : null }} >{{ $bahan->nama_bahan }}</option>
+                                    @empty
+                                    @endforelse
                                 </select>
                                 @error('bahan_id')
                                     <span class="invalid-feedback" role="alert">
@@ -67,8 +76,8 @@
 
                             <div class="mb-3">
                                 <label class="form-label">Deskripsi Produk</label>
-                                <input id="deskripsi" type="hidden" name="deskripsi" class="@error('deskripsi') is-invalid @enderror">
-                                <trix-editor input="x">{!! $produk->deskripsi !!}</trix-editor>
+                                <input id="deskripsi" type="hidden" name="deskripsi" class="@error('deskripsi') is-invalid @enderror" >
+                                <trix-editor input="deskripsi">{!! $produk->deskripsi !!}</trix-editor>
                                 @error('deskripsi')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -127,7 +136,7 @@
                                 @foreach ($images as $img)
                                     <img src="{{ asset($img->gambar_produk) }}" alt="..."
                                         class="block mr-1 mb-2 rounded" style="max-height: 250px;width: 48%;">
-                                    <form action=" {{ route('gambar.destroy', $data->id) }} " method="POST">
+                                    <form action=" {{ route('gambar.destroy', $img->id) }} " method="POST">
                                         @csrf
                                         @method('delete')
                                         <button type="submit" class="btn btn-sm btn-outline-danger"

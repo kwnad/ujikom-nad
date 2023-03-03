@@ -111,14 +111,11 @@ class ProdukController extends Controller
     public function edit($id)
     {
         $produk = Produk::findOrFail($id);
-        $warna = Warna::latest()->get(['id', 'nama_warna']);
-        // $tags = Tag::latest()->get(['id', 'name']);
-        $bahan = Bahan::all();
+        $warnas = Warna::latest()->get(['id', 'nama_warna']);
+        $bahans = Bahan::latest()->get(['id', 'nama_bahan']);
         $images = Gambar::where('produk_id', $id)->get();
-        // $warnaProduk = WarnaProduk::where('produk_id', $id)->get();
-        $bahanProduk = BahanProduk::where('produk_id', $id)->get();
 
-        return view('produk.edit', compact('produk', 'warna', 'bahan', 'bahanProduk', 'images'));
+        return view('produk.edit', compact('produk', 'warnas', 'bahans', 'images'));
     }
 
     /**
@@ -141,6 +138,21 @@ class ProdukController extends Controller
         $produk->harga = $request->harga;
         $produk->deskripsi = $request->deskripsi;
         $produk->save();
+
+        $warnas = WarnaProduk::where('produk_id',$produk->id)->delete();
+        foreach ($request->warna_id as $warna) {
+            $warnas = new WarnaProduk();
+            $warnas->produk_id = $produk->id;
+            $warnas->warna_id = $warna;
+            $warnas->save();
+        }
+        $bahans = BahanProduk::where('produk_id',$produk->id)->delete();
+        foreach ($request->bahan_id as $bahan){
+            $bahans = new BahanProduk();
+            $bahans->produk_id = $produk->id;
+            $bahans->bahan_id = $bahan;
+            $bahans->save();
+        }
         return redirect()->route('produk.index')
             ->with('success', 'Data berhasil diubah!');
     }

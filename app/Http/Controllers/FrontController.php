@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BahanProduk;
 use App\Models\Produk;
 use App\Models\Gambar;
-
+use App\Models\WarnaProduk;
 // use App\Models\Warna;
 // use App\Models\Bahan;
 // use App\Models\Gambar;
@@ -23,11 +24,20 @@ class FrontController extends Controller
         //
     }
 
+    public function produkdetail(Produk $produk,WarnaProduk $warna ,Gambar $images, BahanProduk $bahan )
+    {
+        $images = Gambar::where('produk_id' , $produk->id)->get();
+        $bahan = BahanProduk::where('produk_id', $produk->id)->get();
+        $warna = WarnaProduk::where('produk_id', $produk->id)->get();
+        // dd($kategori);
+        return view('detailproduk', compact('produk','images','warna','bahan'));
+    }
+
     public function produkuser()
     {
-        $produk = Produk::all();
-        $images = Gambar::get();
-        return view('welcome', compact('produk','images'));
+        // $produk = Produk::all();
+        $produk = Produk::with('gambar')->get();
+        return view('welcome', compact('produk'));
     }
     /**
      * Show the form for creating a new resource.

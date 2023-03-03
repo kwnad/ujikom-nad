@@ -1,14 +1,16 @@
 <?php
 
-use App\Http\Controllers\ProdukController;
-use App\Http\Controllers\WarnaController;
-use App\Http\Controllers\BahanController;
-use App\Http\Controllers\GambarController;
-use App\Http\Controllers\WarnaProdukController;
-use App\Http\Controllers\BahanProdukController;
-use App\Http\Controllers\PesananController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\BahanController;
+use App\Http\Controllers\FrontController;
+use App\Http\Controllers\WarnaController;
+use App\Http\Controllers\GambarController;
+use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\PesananController;
+use App\Http\Controllers\BahanProdukController;
+use App\Http\Controllers\WarnaProdukController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,7 +31,7 @@ Route::get('/index', function () {
     return view('index');
 });
 
-Route::resource('warna',WarnaController::class);
+Route::get('/detailproduk/{produk}', [FrontController::class, 'produkdetail']);Route::resource('warna',WarnaController::class);
 Route::resource('produk',ProdukController::class);
 Route::resource('pesanan', PesananController::class);
 Route::resource('bahan', BahanController::class);

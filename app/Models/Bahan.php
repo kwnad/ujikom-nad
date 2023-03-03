@@ -2,17 +2,24 @@
 
 namespace App\Models;
 
-use App\Models\WarnaProduk;
+use App\Models\Produk;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\BahanProduk;
+use App\Models\WarnaProduk;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Bahan extends Model
 {
     use HasFactory;
 
-    public function bahan_produk()
+    public function produks()
     {
-        return $this->hasMany(BahanProduk::class);
+        return $this->belongsToMany(Produk::class)->as('produks');
+    }
+
+    public function warnaProduk()
+    {
+        return $this->hasMany(BahanProduk::class,'bahan_id');
     }
 }

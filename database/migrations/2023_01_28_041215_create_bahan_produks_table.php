@@ -15,10 +15,8 @@ class CreateBahanProduksTable extends Migration
     {
         Schema::create('bahan_produks', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('produk_id');
-            $table->foreign('produk_id')->references('id')->on('produks')->onDelete('cascade');
-            $table->unsignedBigInteger('bahan_id');
-            $table->foreign('bahan_id')->references('id')->on('bahans')->onDelete('cascade');
+            $table->foreignId('produk_id')->constrained()->onDelete('cascade');
+            $table->foreignId('bahan_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
